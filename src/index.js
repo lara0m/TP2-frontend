@@ -10,6 +10,7 @@ app.use(express.json());
 
 // Importar Rutas
 const authRoutes = require('./routes/authRoutes');
+const taskRoutes = require('./routes/taskRoutes');
 
 // Ruta básica de prueba
 app.get('/', (req, res) => {
@@ -18,6 +19,7 @@ app.get('/', (req, res) => {
 
 // Registrar rutas en Express
 app.use('/api/auth', authRoutes);
+app.use('/api/tasks', taskRoutes);
 
 // Variables para entorno serverless o entorno local
 if (process.env.NODE_ENV !== 'production') {
