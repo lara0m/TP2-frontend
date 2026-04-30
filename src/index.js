@@ -29,5 +29,6 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
-// Exportar como función Serverless para desplegar en AWS Lambda, Vercel, o Netlify
+// Exportar la app para Vercel y otras plataformas
+module.exports = app;
 module.exports.handler = serverless(app);
