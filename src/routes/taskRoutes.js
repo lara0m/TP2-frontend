@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { createTask, getTasks, updateTask, deleteTask } = require('../controllers/taskController');
-const { verifyToken } = require('../middlewares/auth'); // El escudo de protección
+const { crearTarea, obtenerTareas, actualizarTarea, eliminarTarea } = require('../controllers/taskController');
+const { verifyToken } = require('../middlewares/auth');
 
-// Rutas Protegidas (Deben llevar el encabezado 'Authorization': 'Bearer <token>')
-router.get('/', verifyToken, getTasks);
-router.post('/', verifyToken, createTask);
-router.put('/:id', verifyToken, updateTask);
-router.delete('/:id', verifyToken, deleteTask);
+// Rutas Protegidas
+router.get('/', verifyToken, obtenerTareas);
+router.post('/', verifyToken, crearTarea);
+router.put('/:id', verifyToken, actualizarTarea);
+router.delete('/:id', verifyToken, eliminarTarea);
 
 module.exports = router;

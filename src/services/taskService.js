@@ -1,44 +1,45 @@
 const { sql } = require('../db/config');
 
-const createTask = async (userId, { title, description }) => {
+const crearTarea = async (usuarioId, { titulo, descripcion }) => {
+  // Mantenemos los nombres de las columnas en inglés para no romper tu base de datos actual,
+  // pero usamos variables en español en todo el código.
   const result = await sql`
     INSERT INTO tasks (user_id, title, description)
-    VALUES (${userId}, ${title}, ${description || null})
+    VALUES (${usuarioId}, ${titulo}, ${descripcion || null})
     RETURNING *
   `;
   return result[0];
 };
 
-const getTasksByUser = async (userId) => {
-  const tasks = await sql`
-    SELECT * FROM tasks WHERE user_id = ${userId} ORDER BY created_at DESC
+const obtenerTareasPorUsuario = async (usuarioId) => {
+  const tareas = await sql`
+    SELECT * FROM tasks WHERE user_id = ${usuarioId} ORDER BY created_at DESC
   `;
-  return tasks;
+  return tareas;
 };
 
-const updateTask = async (userId, taskId, { title, description, status }) => {
-  // Verificar si existe y pertenece al usuario
-  const taskCheck = await sql`SELECT id FROM tasks WHERE id = ${taskId} AND user_id = ${userId}`;
-  if (taskCheck.length === 0) {
+const actualizarTarea = async (usuarioId, tareaId, { titulo, descripcion, estado }) => {
+  const check = await sql`SELECT id FROM tasks WHERE id = ${tareaId} AND user_id = ${usuarioId}`;
+  if (check.length === 0) {
     throw new Error('Tarea no encontrada o no tienes permisos');
   }
 
   const result = await sql`
     UPDATE tasks 
     SET 
-      title = COALESCE(${title}, title),
-      description = COALESCE(${description}, description),
-      status = COALESCE(${status}, status)
-    WHERE id = ${taskId} AND user_id = ${userId}
+      title = COALESCE(${titulo}, title),
+      description = COALESCE(${descripcion}, description),
+      status = COALESCE(${estado}, status)
+    WHERE id = ${tareaId} AND user_id = ${usuarioId}
     RETURNING *
   `;
   return result[0];
 };
 
-const deleteTask = async (userId, taskId) => {
+const eliminarTarea = async (usuarioId, tareaId) => {
   const result = await sql`
     DELETE FROM tasks 
-    WHERE id = ${taskId} AND user_id = ${userId}
+    WHERE id = ${tareaId} AND user_id = ${usuarioId}
     RETURNING id
   `;
   
@@ -48,4 +49,4 @@ const deleteTask = async (userId, taskId) => {
   return true;
 };
 
-module.exports = { createTask, getTasksByUser, updateTask, deleteTask };
+module.exports = { crearTarea, obtenerTareasPorUsuario, actualizarTarea, eliminarTarea };
