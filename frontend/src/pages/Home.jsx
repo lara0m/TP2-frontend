@@ -51,10 +51,6 @@ function Home() {
           </div>
         </section>
       </main>
-
-      <footer className="home-footer">
-        <p>&copy; 2024 Gestor de Tareas. Todos los derechos reservados.</p>
-      </footer>
     </div>
   );
 }
