@@ -32,8 +32,9 @@ function Register() {
 
     try {
       await axios.post(
-        "http://localhost:3001/api/auth/register",
+        "http://localhost:3000/api/auth/register",
         {
+          name: email.split("@")[0], // Nombre generado automáticamente a partir del email
           email,
           password,
         }

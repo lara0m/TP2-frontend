@@ -9,10 +9,10 @@ function TaskList({ tasks, onDeleteTask }) {
     setUpdatingId(task.id);
     try {
       const token = localStorage.getItem("token");
-      const newStatus = task.estado === "completada" ? "pendiente" : "completada";
+      const newStatus = task.status === "completada" ? "pendiente" : "completada";
 
       await axios.put(
-        `http://localhost:3001/api/tasks/${task.id}`,
+        `http://localhost:3000/api/tasks/${task.id}`,
         { estado: newStatus },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -59,12 +59,12 @@ function TaskList({ tasks, onDeleteTask }) {
       {tasks.map((task) => (
         <div
           key={task.id}
-          className={`task-card ${task.estado === "completada" ? "completed" : ""}`}
+          className={`task-card ${task.status === "completada" ? "completed" : ""}`}
         >
           <div className="task-checkbox">
             <input
               type="checkbox"
-              checked={task.estado === "completada"}
+              checked={task.status === "completada"}
               onChange={() => handleCompleteTask(task)}
               disabled={updatingId === task.id}
             />
@@ -84,8 +84,8 @@ function TaskList({ tasks, onDeleteTask }) {
               <span className="task-date">
                 📅 {new Date(task.created_at).toLocaleDateString("es-ES")}
               </span>
-              <span className={`task-status ${task.estado}`}>
-                {task.estado === "completada" ? "✅ Completada" : "⏳ Pendiente"}
+              <span className={`task-status ${task.status}`}>
+                {task.status === "completada" ? "✅ Completada" : "⏳ Pendiente"}
               </span>
             </div>
           </div>

@@ -20,12 +20,13 @@ function Dashboard({ setIsAuthenticated }) {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        "http://localhost:3001/api/tasks",
+        "http://localhost:3000/api/tasks",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      setTasks(response.data);
+      // Backend retorna { tareas: [...] } en base a los últimos cambios a español
+      setTasks(response.data.tareas || response.data);
     } catch (error) {
       console.error("Error al cargar las tareas:", error);
     } finally {
@@ -42,7 +43,7 @@ function Dashboard({ setIsAuthenticated }) {
     try {
       const token = localStorage.getItem("token");
       await axios.delete(
-        `http://localhost:3001/api/tasks/${taskId}`,
+        `http://localhost:3000/api/tasks/${taskId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -61,15 +62,15 @@ function Dashboard({ setIsAuthenticated }) {
   };
 
   const filteredTasks = tasks.filter(task => {
-    if (filter === "completed") return task.estado === "completada";
-    if (filter === "pending") return task.estado !== "completada";
+    if (filter === "completed") return task.status === "completada";
+    if (filter === "pending") return task.status !== "completada";
     return true;
   });
 
   const stats = {
     total: tasks.length,
-    completed: tasks.filter(t => t.estado === "completada").length,
-    pending: tasks.filter(t => t.estado !== "completada").length,
+    completed: tasks.filter(t => t.status === "completada").length,
+    pending: tasks.filter(t => t.status !== "completada").length,
   };
 
   if (loading) {

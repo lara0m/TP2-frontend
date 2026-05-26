@@ -17,7 +17,7 @@ function Login({ setIsAuthenticated }) {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/auth/login",
+        "http://localhost:3000/api/auth/login",
         {
           email,
           password,
@@ -25,7 +25,7 @@ function Login({ setIsAuthenticated }) {
       );
 
       localStorage.setItem("token", response.data.token);
-      localStorage.setItem("userId", response.data.userId);
+      localStorage.setItem("userId", response.data.user?.id || response.data.userId);
 
       setIsAuthenticated(true);
       navigate("/dashboard");

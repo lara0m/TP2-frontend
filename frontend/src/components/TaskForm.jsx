@@ -17,7 +17,7 @@ function TaskForm({ onTaskAdded }) {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://localhost:3001/api/tasks",
+        "http://localhost:3000/api/tasks",
         {
           titulo,
           descripcion,
@@ -28,7 +28,8 @@ function TaskForm({ onTaskAdded }) {
         }
       );
 
-      onTaskAdded(response.data);
+      // Si el backend devuelve { tarea: {...} } gracias a los cambios en español
+      onTaskAdded(response.data.tarea || response.data);
       setTitulo("");
       setDescripcion("");
       setPrioridad("media");
