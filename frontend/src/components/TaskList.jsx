@@ -12,7 +12,7 @@ function TaskList({ tasks, onDeleteTask }) {
       const newStatus = task.status === "completada" ? "pendiente" : "completada";
 
       await axios.put(
-        `http://localhost:3000/api/tasks/${task.id}`,
+        `http://localhost:3001/api/tasks/${task.id}`,
         { estado: newStatus },
         {
           headers: { Authorization: `Bearer ${token}` },

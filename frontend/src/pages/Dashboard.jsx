@@ -20,7 +20,7 @@ function Dashboard({ setIsAuthenticated }) {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        "http://localhost:3000/api/tasks",
+        "http://localhost:3001/api/tasks",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -43,7 +43,7 @@ function Dashboard({ setIsAuthenticated }) {
     try {
       const token = localStorage.getItem("token");
       await axios.delete(
-        `http://localhost:3000/api/tasks/${taskId}`,
+        `http://localhost:3001/api/tasks/${taskId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
