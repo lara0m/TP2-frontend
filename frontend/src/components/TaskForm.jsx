@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../styles/taskform.css";
 
-function TaskForm({ onTaskAdded }) {
+function TaskForm({ onTaskAdded, onCancel, defaultStatus = "pendiente" }) {
   const [titulo, setTitulo] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [prioridad, setPrioridad] = useState("media");
@@ -11,6 +11,7 @@ function TaskForm({ onTaskAdded }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!titulo.trim()) return;
     setError("");
     setLoading(true);
 
@@ -18,17 +19,9 @@ function TaskForm({ onTaskAdded }) {
       const token = localStorage.getItem("token");
       const response = await axios.post(
         "http://localhost:3001/api/tasks",
-        {
-          titulo,
-          descripcion,
-          prioridad,
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        { titulo, descripcion, prioridad, estado: defaultStatus },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-
-      // Si el backend devuelve { tarea: {...} } gracias a los cambios en español
       onTaskAdded(response.data.tarea || response.data);
       setTitulo("");
       setDescripcion("");
@@ -41,56 +34,51 @@ function TaskForm({ onTaskAdded }) {
   };
 
   return (
-    <form className="task-form" onSubmit={handleSubmit}>
-      <h3>Crear Nueva Tarea</h3>
+    <form className="task-form-inline" onSubmit={handleSubmit}>
+      {error && <div className="form-error-inline">{error}</div>}
 
-      {error && <div className="form-error">{error}</div>}
+      <input
+        type="text"
+        className="input-titulo"
+        placeholder="Título de la tarea"
+        value={titulo}
+        onChange={(e) => setTitulo(e.target.value)}
+        required
+        disabled={loading}
+        autoFocus
+        maxLength="100"
+      />
 
-      <div className="form-group">
-        <label htmlFor="titulo">Título de la Tarea *</label>
-        <input
-          type="text"
-          id="titulo"
-          placeholder="Ej: Completar proyecto..."
-          value={titulo}
-          onChange={(e) => setTitulo(e.target.value)}
-          required
-          disabled={loading}
-          maxLength="100"
-        />
-      </div>
+      <textarea
+        className="input-descripcion"
+        placeholder="Descripción (opcional)"
+        value={descripcion}
+        onChange={(e) => setDescripcion(e.target.value)}
+        disabled={loading}
+        rows="2"
+        maxLength="500"
+      />
 
-      <div className="form-group">
-        <label htmlFor="descripcion">Descripción</label>
-        <textarea
-          id="descripcion"
-          placeholder="Añade detalles sobre la tarea..."
-          value={descripcion}
-          onChange={(e) => setDescripcion(e.target.value)}
-          disabled={loading}
-          rows="4"
-          maxLength="500"
-        />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="prioridad">Prioridad</label>
+      <div className="form-inline-row">
         <select
-          id="prioridad"
+          className="select-prioridad"
           value={prioridad}
           onChange={(e) => setPrioridad(e.target.value)}
           disabled={loading}
         >
-          <option value="baja">Baja</option>
-          <option value="media">Media</option>
-          <option value="alta">Alta</option>
+          <option value="baja">🟢 Baja</option>
+          <option value="media">🟡 Media</option>
+          <option value="alta">🔴 Alta</option>
         </select>
-      </div>
 
-      <div className="form-actions">
-        <button type="submit" disabled={loading} className="btn-submit-form">
-          {loading ? "Creando..." : "Crear Tarea"}
-        </button>
+        <div className="form-inline-actions">
+          <button type="button" className="btn-cancel-inline" onClick={onCancel} disabled={loading}>
+            Cancelar
+          </button>
+          <button type="submit" className="btn-add-inline" disabled={loading || !titulo.trim()}>
+            {loading ? "..." : "Agregar"}
+          </button>
+        </div>
       </div>
     </form>
   );

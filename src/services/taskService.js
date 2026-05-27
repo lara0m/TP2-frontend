@@ -6,14 +6,15 @@ const crearTarea = async (usuarioId, { titulo, descripcion }) => {
   const result = await sql`
     INSERT INTO tasks (user_id, title, description)
     VALUES (${usuarioId}, ${titulo}, ${descripcion || null})
-    RETURNING *
+    RETURNING id, user_id, title as titulo, description as descripcion, status, created_at
   `;
   return result[0];
 };
 
 const obtenerTareasPorUsuario = async (usuarioId) => {
   const tareas = await sql`
-    SELECT * FROM tasks WHERE user_id = ${usuarioId} ORDER BY created_at DESC
+    SELECT id, user_id, title as titulo, description as descripcion, status, created_at 
+    FROM tasks WHERE user_id = ${usuarioId} ORDER BY created_at DESC
   `;
   return tareas;
 };
@@ -31,7 +32,7 @@ const actualizarTarea = async (usuarioId, tareaId, { titulo, descripcion, estado
       description = COALESCE(${descripcion}, description),
       status = COALESCE(${estado}, status)
     WHERE id = ${tareaId} AND user_id = ${usuarioId}
-    RETURNING *
+    RETURNING id, user_id, title as titulo, description as descripcion, status, created_at
   `;
   return result[0];
 };

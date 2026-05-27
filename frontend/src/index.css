@@ -1,10 +1,9 @@
-/* filepath: c:\Users\Renata\Documents\GitHub\TP2-frontend\frontend\src\index.css */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  font-family: 'DM Sans', sans-serif;
+  background-color: #ECF0F6;
 }
 
 h1, h2 {
-  text-align: center;
+  text-align: left;
 }

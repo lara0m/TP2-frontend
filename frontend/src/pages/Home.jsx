@@ -6,50 +6,44 @@ function Home() {
   return (
     <div className="home-container">
       <header className="home-header">
-        <h1>Gestor de Tareas</h1>
-        <p className="subtitle">Organiza tu vida, una tarea a la vez</p>
+        <div className="home-logo">
+          <span className="home-logo-icon">⬡</span>
+          <span className="home-logo-name">Planify</span>
+        </div>
+        <div style={{ display: "flex", gap: "16px" }}>
+          <Link to="/login" className="btn-home-secondary" style={{ padding: "8px 20px", fontSize: "14px" }}>
+            Iniciar Sesión
+          </Link>
+          <Link to="/register" className="btn-home-primary" style={{ padding: "8px 20px", fontSize: "14px" }}>
+            Registrarse
+          </Link>
+        </div>
       </header>
 
       <main className="home-content">
-        <section className="hero">
-          <h2>Bienvenido al Gestor de Tareas</h2>
-          <p>
-            Una aplicación simple pero poderosa para gestionar tus tareas diarias
-            de manera eficiente.
-          </p>
-
-          <div className="features">
-            <div className="feature">
-              <h3>📋 Crear Tareas</h3>
-              <p>Crea y organiza tus tareas de manera sencilla</p>
-            </div>
-            <div className="feature">
-              <h3>✏️ Editar</h3>
-              <p>Modifica tus tareas en cualquier momento</p>
-            </div>
-            <div className="feature">
-              <h3>✅ Completar</h3>
-              <p>Marca tus tareas como completadas</p>
-            </div>
-            <div className="feature">
-              <h3>🔐 Seguridad</h3>
-              <p>Tus datos están seguros y protegidos</p>
-            </div>
+        <div className="home-hero">
+          <h1>Organizá tus tareas,<br />sin complicaciones</h1>
+          <p>Un kanban simple y elegante para gestionar tus proyectos del día a día.</p>
+          <div className="home-cta-buttons">
+            <Link to="/register" className="btn-home-primary">Empezar gratis</Link>
+            <Link to="/login" className="btn-home-secondary">Ya tengo cuenta</Link>
           </div>
-        </section>
+        </div>
 
-        <section className="cta-section">
-          <h3>¿Listo para comenzar?</h3>
-          <p>Regístrate o inicia sesión para empezar a gestionar tus tareas</p>
-          <div className="cta-buttons">
-            <Link to="/login" className="btn btn-primary">
-              Iniciar Sesión
-            </Link>
-            <Link to="/register" className="btn btn-secondary">
-              Registrarse
-            </Link>
+        <div className="home-features">
+          <div className="home-feature">
+            <h3>📋 Tablero visual</h3>
+            <p>Organizá tus tareas en columnas: pendiente, en proceso y hecho</p>
           </div>
-        </section>
+          <div className="home-feature">
+            <h3>⚡ Rápido y simple</h3>
+            <p>Sin distracciones. Creá tareas en segundos desde cualquier columna</p>
+          </div>
+          <div className="home-feature">
+            <h3>🔐 Tus datos, seguros</h3>
+            <p>Autenticación segura. Solo vos accedés a tus tareas</p>
+          </div>
+        </div>
       </main>
     </div>
   );

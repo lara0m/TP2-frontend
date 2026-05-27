@@ -16,17 +16,12 @@ function Login({ setIsAuthenticated }) {
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        "http://localhost:3001/api/auth/login",
-        {
-          email,
-          password,
-        }
-      );
-
+      const response = await axios.post("http://localhost:3001/api/auth/login", {
+        email,
+        password,
+      });
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("userId", response.data.user?.id || response.data.userId);
-
       setIsAuthenticated(true);
       navigate("/dashboard");
     } catch (err) {
@@ -39,7 +34,14 @@ function Login({ setIsAuthenticated }) {
   return (
     <div className="auth-container">
       <div className="auth-box">
+        <div className="auth-logo">
+          <span className="auth-logo-icon">⬡</span>
+          <span className="auth-logo-name">Planify</span>
+        </div>
+
         <h2>Iniciar Sesión</h2>
+        <p className="auth-subtitle">Bienvenido de vuelta. Ingresá tus datos.</p>
+
         {error && <div className="error-message">{error}</div>}
 
         <form onSubmit={handleSubmit}>
@@ -75,7 +77,7 @@ function Login({ setIsAuthenticated }) {
         </form>
 
         <p className="auth-link">
-          ¿No tienes cuenta? <Link to="/register">Regístrate aquí</Link>
+          ¿No tenés cuenta? <Link to="/register">Registrate aquí</Link>
         </p>
       </div>
     </div>
