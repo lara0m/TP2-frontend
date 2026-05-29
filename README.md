@@ -1,5 +1,4 @@
-# Aplicación Serverless - Gestor de Tareas (Backend)
-- Por ahora hicimos solo el back
+# Planify — Backend
 
 ## Características que fuimos cumpliendo
 - **Arquitectura Serverless:** Desarrollado con Node.js + Express usando el empaquetador `serverless-http` y listo para desplegar en **Vercel**.
@@ -47,14 +46,10 @@ Aplicación web de gestión de tareas con interfaz kanban. Permite crear, organi
 ---
 
 ## Tecnologías utilizadas
-
-| Tecnología | Versión | Uso |
-|---|---|---|
-| React | 18+ | Framework principal de UI |
-| React Router DOM | 6+ | Ruteo client-side |
-| Axios | latest | Comunicación con la API REST |
-| CSS Modules (plain) | — | Estilos por componente |
-| Poppins (Google Fonts) | — | Tipografía |
+- React | 18+ | Framework principal de UI |
+- React Router DOM | 6+ | Ruteo client-side |
+- Axios | latest | Comunicación con la API REST |
+- CSS Modules (plain) | — | Estilos por componente |
 
 ---
 
