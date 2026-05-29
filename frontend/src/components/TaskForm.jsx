@@ -18,7 +18,7 @@ function TaskForm({ onTaskAdded, onCancel, defaultStatus = "pendiente" }) {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://localhost:3001/api/tasks",
+        `${process.env.REACT_APP_API_URL}/api/tasks`,
         { titulo, descripcion, prioridad, estado: defaultStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );

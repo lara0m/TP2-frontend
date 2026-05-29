@@ -107,7 +107,7 @@ function Dashboard({ setIsAuthenticated }) {
   const fetchTasks = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:3001/api/tasks", {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/tasks`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setTasks(response.data.tareas || response.data);
@@ -127,7 +127,7 @@ function Dashboard({ setIsAuthenticated }) {
   const handleDeleteTask = async (taskId) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:3001/api/tasks/${taskId}`, {
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/tasks/${taskId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setTasks(tasks.filter((t) => t.id !== taskId));
@@ -140,7 +140,7 @@ function Dashboard({ setIsAuthenticated }) {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `http://localhost:3001/api/tasks/${task.id}`,
+        `${process.env.REACT_APP_API_URL}/api/tasks/${task.id}`,
         { estado: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
