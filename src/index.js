@@ -30,5 +30,4 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // Exportar la app para Vercel y otras plataformas
-module.exports = app;
-module.exports.handler = serverless(app);
+module.exports = serverless(app);
