@@ -1,6 +1,5 @@
 {
   "name": "tp2-frontend",
-  "homepage": ".",
   "version": "1.0.0",
   "description": "Frontend para el gestor de tareas",
   "main": "src/index.js",
