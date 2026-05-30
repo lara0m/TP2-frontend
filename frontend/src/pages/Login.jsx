@@ -16,7 +16,8 @@ function Login({ setIsAuthenticated }) {
     setLoading(true);
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, {
+      const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000";
+      const response = await axios.post(`${API_URL}/api/auth/login`, {
         email,
         password,
       });
