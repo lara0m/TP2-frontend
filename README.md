@@ -1,5 +1,7 @@
 # Planify — Backend
 
+## Accede a este link de Vercel (el proyecto ya esta arreglado): `https://tp-2-frontend-two.vercel.app/`.
+
 ## Características que fuimos cumpliendo
 - **Arquitectura Serverless:** Desarrollado con Node.js + Express usando el empaquetador `serverless-http` y listo para desplegar en **Vercel**.
 - **Autenticación de Usuarios:** Registro y Login nativo. Las contraseñas se encriptan con `bcryptjs` y el manejo de sesiones se realiza mediante **JSON Web Tokens (JWT)**.
@@ -25,7 +27,7 @@
 
 ## Cómo correr el proyecto:
 
-La API de Vercel: `https://tp-2-frontend-ashen.vercel.app/`.
+
 
 ## Endpoints Principales hechos:
 **Autenticación (`/api/auth`)** (Públicas)
@@ -80,13 +82,14 @@ frontend/
 
 ---
 
-## Instalación y ejecución
+## Instalación y ejecución por si no queres correrlo en vercel
 
 ### Requisitos previos
 
 - Node.js 18+
 - npm o yarn
-- Backend corriendo en `http://localhost:3001`
+- Backend corriendo usando: npm run dev ubicandose en la raiz del repo (TP2-frontend),
+y queda en el servidor local `http://localhost:3000`:
 
 ### Pasos
 
@@ -98,7 +101,7 @@ cd frontend
 # Instalar dependencias
 npm install
 
-# Iniciar en modo desarrollo
+# Iniciar
 npm start
 ```
 
