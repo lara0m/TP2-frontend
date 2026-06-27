@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/auth.css";
+import { validateRegisterForm, generateNameFromEmail } from "../utils/validacion";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -18,14 +19,10 @@ function Register() {
     setSuccess("");
     setLoading(true);
 
-    if (password !== confirmPassword) {
-      setError("Las contraseñas no coinciden");
-      setLoading(false);
-      return;
-    }
-
-    if (password.length < 6) {
-      setError("La contraseña debe tener al menos 6 caracteres");
+// ...dentro de handleSubmit:
+    const validation = validateRegisterForm(password, confirmPassword);
+    if (!validation.valid) {
+      setError(validation.error);
       setLoading(false);
       return;
     }
@@ -36,7 +33,7 @@ function Register() {
       await axios.post(
         `${API_URL}/api/auth/register`,
         {
-          name: email.split("@")[0], // Nombre generado automáticamente a partir del email
+          name: generateNameFromEmail(email), // Nombre generado automáticamente a partir del email
           email,
           password,
         }
