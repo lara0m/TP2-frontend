@@ -6,9 +6,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    
     "test": "vitest",
-    "lint": "eslint",
+    "lint": "eslint src --ext .js,.jsx",
     "eject": "react-scripts eject"
   },
   "dependencies": {
@@ -33,8 +32,7 @@
     ]
   },
   "devDependencies": {
-    "@vitest/eslint-plugin": "^1.6.20",
-    "eslint": "^10.5.0",
+    "eslint": "^8.57.1",
     "vitest": "^4.1.9"
   }
 }
