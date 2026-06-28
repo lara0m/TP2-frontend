@@ -76,7 +76,7 @@ jobs:
         run: npx playwright install chromium --with-deps
 
       - name: Run E2E tests
-        run: npm run test:e2e
+        run: npx playwright test
         env:
           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
 
