@@ -1,6 +1,6 @@
 # Planify — Backend
 
-## Accede a este link de Vercel (el proyecto ya esta arreglado): `https://tp-2-frontend-two.vercel.app/`.
+### URL de Producción: `https://tp-2-frontend-two.vercel.app/`.
 
 ## Características que fuimos cumpliendo
 - **Arquitectura Serverless:** Desarrollado con Node.js + Express usando el empaquetador `serverless-http` y listo para desplegar en **Vercel**.
@@ -23,10 +23,12 @@
 * `src/controllers/` -> Se encargan de validar la Request (`req.body`), llamar al Servicio correspondiente, y emitir la Response (`res.json`).
 * `src/routes/` -> Definición de las URLs de consumo (Endpoints).
 
-## Todavia la estructura de las carpetas que habia dicho la consigna no las hicimos
 
-## Cómo correr el proyecto:
-
+## Flujo de trabajo:
+Las ramas siguen esta convención:
+- `feature/nombre-feature` — nueva funcionalidad
+- `fix/nombre-bug` — corrección de bug
+- `hotfix/nombre` — corrección urgente en producción
 
 
 ## Endpoints Principales hechos:
